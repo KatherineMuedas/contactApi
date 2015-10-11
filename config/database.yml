@@ -1,0 +1,30 @@
+development:
+  adapter: postgresql
+  host: localhost
+  database: contactApi_development
+  pool: 5
+  username: katherine
+  password:
+  encoding: unicode 
+
+test:
+  adapter: postgresql
+  host: localhost
+  database: contactApi_test
+  pool: 5
+  username: katherine
+  password:
+  encoding: unicode 
+
+production:
+  adapter: postgresql
+  host: localhost
+  database: contactApi_production
+  pool: 5
+  username: katherine
+  password:  
+  encoding: unicode
+
+
+
+
