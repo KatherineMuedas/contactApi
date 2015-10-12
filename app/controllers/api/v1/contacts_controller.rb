@@ -4,9 +4,13 @@ class API::V1::ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    # @contacts = Contact.all
 
-    render json: @contacts
+    if params[:relationship]
+      render json: Contact.relationship(params[:relationship])
+    else
+      render json: Contact.all
+    end
   end
 
   # GET /contacts/1
