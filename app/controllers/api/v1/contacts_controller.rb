@@ -22,7 +22,7 @@ class API::V1::ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(params[:contact])
+    @contact = Contact.new(contact_params)
 
     if @contact.save
       render json: @contact, status: :created, location: @contact
@@ -34,7 +34,7 @@ class API::V1::ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
-    if @contact.update(params[:contact])
+    if @contact.update(contact_params)
       head :no_content
     else
       render json: @contact.errors, status: :unprocessable_entity
@@ -57,7 +57,7 @@ class API::V1::ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:name, :email, :twitter)
+      params.require(:contact).permit(:name, :email, :twitter, :birthday, :phone, :relationship)
     end
 end
 
