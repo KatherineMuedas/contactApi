@@ -76,7 +76,7 @@ class API::V1::ContactsController < ApplicationController
     end
 
     def filtering_params(params)
-      params.slice(:name, :relationship, :twitter, :offset, :limit)
+      params.slice(:search_name, :search_relationship, :search_twitter, :fuzzy_twitter, :page, :per)
     end
 end
 
