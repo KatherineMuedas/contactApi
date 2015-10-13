@@ -3,5 +3,6 @@ class Contact < ActiveRecord::Base
   scope :search_twitter, -> (twitter) { where twitter: twitter }
   scope :fuzzy_twitter, -> (twitter) { where('twitter ilike ?', "%#{twitter}%") }
   scope :search_name, -> (name) { where name: name }
+  scope :fuzzy_name, -> (name) { where('name ilike ?', "%#{name}%") }
 
 end

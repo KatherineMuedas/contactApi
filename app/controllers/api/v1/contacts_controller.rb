@@ -10,6 +10,7 @@ class API::V1::ContactsController < ApplicationController
       @contacts = @contacts.public_send(key, value) if value.present?
     end
      # Order by
+     #order=name:asc / order=name:desc / order=name (defaults to ascending)
     @contacts = @contacts.order(params[:order].gsub(':', ' ')) if params[:order]
 
     # if params[:relationship]
@@ -79,7 +80,7 @@ class API::V1::ContactsController < ApplicationController
     end
 
     def filtering_params(params)
-      params.slice(:search_name, :search_relationship, :search_twitter, :fuzzy_twitter, :page, :per)
+      params.slice(:search_name, :search_relationship, :search_twitter, :fuzzy_twitter, :page, :per, :fuzzy_name)
     end
 end
 
