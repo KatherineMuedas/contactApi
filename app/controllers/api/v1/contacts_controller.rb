@@ -4,13 +4,28 @@ class API::V1::ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    # @contacts = Contact.all
-
-    if params[:relationship]
-      render json: Contact.relationship(params[:relationship])
-    else
-      render json: Contact.all
+    @contacts = Contact.all
+    filtering_params(params).each do |key, value|
+      @contacts = @contacts.public_send(key, value) if value.present?
     end
+
+    # if params[:relationship]
+    #   render json: Contact.relationship(params[:relationship])
+    # else
+    #   render json: Contact.all
+    # end
+
+    # if (params[:offset] && params[:limit])
+    #   @contacts = @contacts.page(1).per(params[:limit]).padding(params[:offset])
+    # else
+    #   @contacts = @contacts.page(1).per(25)
+    # end
+
+    # @contacts = @contacts.relationship(params[:relationship]) if params[:relationship]
+
+    render json: @contacts
+
+
   end
 
   # GET /contacts/1
@@ -58,6 +73,10 @@ class API::V1::ContactsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
       params.require(:contact).permit(:name, :email, :twitter, :birthday, :phone, :relationship)
+    end
+
+    def filtering_params(params)
+      params.slice(:name, :relationship, :twitter, :offset, :limit)
     end
 end
 
