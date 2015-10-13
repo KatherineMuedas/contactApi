@@ -4,6 +4,7 @@ class API::V1::ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
+    params[:page] ||= 1  
     @contacts = Contact.all
     filtering_params(params).each do |key, value|
       @contacts = @contacts.public_send(key, value) if value.present?
